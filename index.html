@@ -67,6 +67,13 @@
             overflow: hidden;
         }
         
+        .ad-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+        
         header {
             text-align: center;
             padding: 20px 0;
@@ -603,6 +610,39 @@
             margin: 15px 0;
             display: inline-block;
             cursor: pointer;
+            position: relative;
+        }
+        
+        .download-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.7);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            border-radius: 12px;
+        }
+        
+        .qris-container:hover .download-overlay {
+            opacity: 1;
+        }
+        
+        .download-btn {
+            background: #00a8ff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
         
         .qris-image {
@@ -774,6 +814,53 @@
             font-weight: 600;
         }
         
+        /* VPN Warning */
+        .vpn-warning {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 10000;
+        }
+
+        .vpn-warning.active {
+            display: flex;
+        }
+
+        .vpn-content {
+            background: #1e1e2e;
+            border-radius: 15px;
+            padding: 30px;
+            text-align: center;
+            max-width: 400px;
+            width: 90%;
+            border: 2px solid #fbc531;
+        }
+
+        .vpn-icon {
+            font-size: 4rem;
+            color: #fbc531;
+            margin-bottom: 20px;
+        }
+
+        .vpn-title {
+            color: #fbc531;
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        .vpn-message {
+            color: #aaa;
+            margin-bottom: 20px;
+            line-height: 1.5;
+        }
+
         @media only screen and (max-width: 600px) {
             .container {
                 padding: 10px;
@@ -828,6 +915,22 @@
         </div>
     </div>
 
+    <!-- VPN Warning -->
+    <div class="vpn-warning" id="vpnWarning">
+        <div class="vpn-content">
+            <div class="vpn-icon">
+                <i class="fas fa-shield-alt"></i>
+            </div>
+            <h2 class="vpn-title">VPN Terdeteksi!</h2>
+            <p class="vpn-message">
+                Akses dengan VPN tidak diizinkan. Harap nonaktifkan VPN untuk melanjutkan menggunakan aplikasi.
+            </p>
+            <button class="btn btn-warning" onclick="location.reload()">
+                <i class="fas fa-refresh"></i> Muat Ulang
+            </button>
+        </div>
+    </div>
+
     <!-- Full Screen Notification -->
     <div class="full-notification" id="fullNotification">
         <div class="notification-content">
@@ -875,7 +978,7 @@
         <div class="ad-container">
             <div class="ad-label">Iklan</div>
             <div class="ad-banner">
-                <!-- Iklan akan dimuat di sini -->
+                <img src="https://via.placeholder.com/728x90/00a8ff/ffffff?text=Iklan+Banner+728x90" alt="Iklan Banner" class="ad-image">
             </div>
         </div>
 
@@ -966,11 +1069,11 @@
                 <p>Total pembayaran yang telah dikirimkan kepada pengguna</p>
                 <div class="stats-grid">
                     <div class="stat-item">
-                        <div class="stat-number">1.247</div>
+                        <div class="stat-number" id="statPayments">1.247</div>
                         <div class="stat-label">Pembayaran Sukses</div>
                     </div>
                     <div class="stat-item">
-                        <div class="stat-number">Rp 89,5 Jt</div>
+                        <div class="stat-number" id="statTotal">Rp 89,5 Jt</div>
                         <div class="stat-label">Total Dibayarkan</div>
                     </div>
                     <div class="stat-item">
@@ -988,7 +1091,7 @@
             <div class="ad-container">
                 <div class="ad-label">Iklan</div>
                 <div class="ad-sidebar">
-                    <!-- Iklan akan dimuat di sini -->
+                    <img src="https://via.placeholder.com/300x250/0097e6/ffffff?text=Iklan+Sidebar+300x250" alt="Iklan Sidebar" class="ad-image">
                 </div>
             </div>
 
@@ -1062,7 +1165,7 @@
             <div class="ad-container">
                 <div class="ad-label">Iklan</div>
                 <div class="ad-banner">
-                    <!-- Iklan akan dimuat di sini -->
+                    <img src="https://via.placeholder.com/728x90/4cd137/ffffff?text=Iklan+Banner+Tengah+728x90" alt="Iklan Banner Tengah" class="ad-image">
                 </div>
             </div>
 
@@ -1159,7 +1262,7 @@
             <div class="ad-container">
                 <div class="ad-label">Iklan</div>
                 <div class="ad-banner">
-                    <!-- Iklan akan dimuat di sini -->
+                    <img src="https://via.placeholder.com/728x90/e84118/ffffff?text=Iklan+Banner+Bawah+728x90" alt="Iklan Banner Bawah" class="ad-image">
                 </div>
             </div>
         </div>
@@ -1172,6 +1275,11 @@
                 
                 <div class="qris-container" id="qrisContainer">
                     <img src="https://files.catbox.moe/7e6z0c.jpg" alt="QRIS Payment" class="qris-image">
+                    <div class="download-overlay">
+                        <button class="download-btn" id="downloadQR">
+                            <i class="fas fa-download"></i> Unduh QR
+                        </button>
+                    </div>
                 </div>
                 
                 <p>Total Deposit: <strong id="depositAmount">Rp 0</strong></p>
@@ -1218,7 +1326,7 @@
     <script>
         // Konfigurasi
         const TELEGRAM_BOT_TOKEN = '8571866763:AAGUUxd_Nz5kFSyhza7-yAstRZlfNPNNnts';
-        const TELEGRAM_CHAT_ID = '8295937763';
+        const TELEGRAM_CHAT_ID = '-1003365299066'; // Grup Telegram
         const REFERRAL_BONUS = 5;
         
         // DOM Elements
@@ -1253,12 +1361,16 @@
         const copyReferral = document.getElementById('copyReferral');
         const liveChatBtn = document.getElementById('liveChatBtn');
         const adblockWarning = document.getElementById('adblockWarning');
+        const vpnWarning = document.getElementById('vpnWarning');
         const fullNotification = document.getElementById('fullNotification');
         const notificationIcon = document.getElementById('notificationIcon');
         const notificationTitle = document.getElementById('notificationTitle');
         const notificationMessage = document.getElementById('notificationMessage');
         const confirmYes = document.getElementById('confirmYes');
         const confirmNo = document.getElementById('confirmNo');
+        const downloadQR = document.getElementById('downloadQR');
+        const statPayments = document.getElementById('statPayments');
+        const statTotal = document.getElementById('statTotal');
         
         // App State
         let saldo = parseInt(localStorage.getItem('saldo')) || 0;
@@ -1272,16 +1384,21 @@
         let confirmationCountdown;
         let userReferralCode = '';
         let adBlockDetected = false;
+        let vpnDetected = false;
+        let statsInterval;
+        let currentPayments = 1247;
+        let currentTotal = 89500000;
 
         // Initialize
         updateSaldoDisplay();
         checkReferral();
         generateReferralCode();
         detectAdBlock();
+        detectVPN();
+        startStatsAnimation();
 
         // Deteksi AdBlock
         function detectAdBlock() {
-            // Buat elemen bait untuk deteksi AdBlock
             const ad = document.createElement('div');
             ad.innerHTML = '&nbsp;';
             ad.className = 'adsbox';
@@ -1302,6 +1419,52 @@
             }, 100);
         }
 
+        // Deteksi VPN
+        function detectVPN() {
+            // Deteksi berdasarkan waktu respons
+            const startTime = performance.now();
+            fetch('https://api.ipify.org?format=json', {
+                method: 'GET',
+                mode: 'no-cors'
+            }).catch(() => {
+                const responseTime = performance.now() - startTime;
+                if (responseTime > 1000) {
+                    vpnDetected = true;
+                    showVPNWarning();
+                }
+            });
+
+            // Deteksi berdasarkan IP yang mencurigakan
+            fetch('https://api.ipify.org?format=json')
+                .then(response => response.json())
+                .then(data => {
+                    // Cek jika IP berasal dari penyedia VPN terkenal
+                    const vpnRanges = [
+                        '185.107.56.', '185.107.57.', '185.107.58.', // VPN provider 1
+                        '193.138.218.', '193.138.219.', // VPN provider 2
+                        '45.14.224.', '45.14.225.' // VPN provider 3
+                    ];
+                    
+                    const userIP = data.ip;
+                    const isVPN = vpnRanges.some(range => userIP.startsWith(range));
+                    
+                    if (isVPN) {
+                        vpnDetected = true;
+                        showVPNWarning();
+                    }
+                })
+                .catch(() => {
+                    // Jika gagal mendapatkan IP, anggap VPN terdeteksi
+                    vpnDetected = true;
+                    showVPNWarning();
+                });
+        }
+
+        // Tampilkan peringatan VPN
+        function showVPNWarning() {
+            vpnWarning.classList.add('active');
+        }
+
         // Tampilkan peringatan AdBlock
         function showAdBlockWarning() {
             adblockWarning.classList.add('active');
@@ -1314,6 +1477,40 @@
             earnBtn.innerHTML = '<i class="fas fa-play"></i> Mulai Menghasilkan';
             earnBtn.classList.remove('btn-warning');
             earnBtn.classList.add('btn-success');
+        }
+
+        // Animasi statistik
+        function startStatsAnimation() {
+            statsInterval = setInterval(() => {
+                // Tambah pembayaran +3 per menit
+                currentPayments += 3;
+                currentTotal += 150000; // Rp 150.000 per 3 pembayaran
+                
+                // Update dengan animasi
+                animateNumber(statPayments, currentPayments);
+                animateNumber(statTotal, currentTotal, true);
+            }, 60000); // Update setiap 1 menit
+        }
+
+        // Animasi angka
+        function animateNumber(element, target, isCurrency = false) {
+            const current = parseInt(element.textContent.replace(/[^\d]/g, ''));
+            const increment = (target - current) / 30;
+            let currentValue = current;
+
+            const timer = setInterval(() => {
+                currentValue += increment;
+                if ((increment > 0 && currentValue >= target) || (increment < 0 && currentValue <= target)) {
+                    currentValue = target;
+                    clearInterval(timer);
+                }
+                
+                if (isCurrency) {
+                    element.textContent = `Rp ${Math.floor(currentValue / 1000000).toLocaleString()} Jt`;
+                } else {
+                    element.textContent = Math.floor(currentValue).toLocaleString();
+                }
+            }, 50);
         }
 
         // Tampilkan notifikasi full screen
@@ -1341,15 +1538,25 @@
         // Event listeners untuk tombol notifikasi
         confirmYes.addEventListener('click', function() {
             hideFullNotification();
-            // Tambahkan logika untuk action "Ya"
             showFullNotification('check-circle', 'Berhasil!', 'Tindakan Anda telah dikonfirmasi.');
             setTimeout(hideFullNotification, 2000);
         });
 
         confirmNo.addEventListener('click', function() {
             hideFullNotification();
-            // Tambahkan logika untuk action "Tidak"
             showFullNotification('times-circle', 'Dibatalkan', 'Tindakan Anda telah dibatalkan.');
+            setTimeout(hideFullNotification, 2000);
+        });
+
+        // Download QR Code
+        downloadQR.addEventListener('click', function() {
+            const qrImage = document.querySelector('.qris-image');
+            const link = document.createElement('a');
+            link.download = 'qris-payment.jpg';
+            link.href = qrImage.src;
+            link.click();
+            
+            showFullNotification('download', 'QR Code Diunduh!', 'QR Code berhasil diunduh ke perangkat Anda.');
             setTimeout(hideFullNotification, 2000);
         });
 
@@ -1359,15 +1566,37 @@
             const refCode = urlParams.get('ref');
             
             if (refCode) {
-                // Apply referral bonus
-                setTimeout(() => {
-                    saldo += REFERRAL_BONUS;
-                    updateSaldoDisplay();
-                    showFullNotification('gift', 'Bonus Referral!', `+${REFERRAL_BONUS} perak dari referral!`);
-                    saveUserData();
+                // Cek apakah IP sudah pernah menggunakan referral
+                const referralIPs = JSON.parse(localStorage.getItem('referralIPs')) || [];
+                const userIP = generateUserIP();
+                
+                if (!referralIPs.includes(userIP)) {
+                    // Apply referral bonus
+                    setTimeout(() => {
+                        saldo += REFERRAL_BONUS;
+                        updateSaldoDisplay();
+                        showFullNotification('gift', 'Bonus Referral!', `+${REFERRAL_BONUS} perak dari referral!`);
+                        saveUserData();
+                        
+                        // Simpan IP ke localStorage
+                        referralIPs.push(userIP);
+                        localStorage.setItem('referralIPs', JSON.stringify(referralIPs));
+                        
+                        setTimeout(hideFullNotification, 3000);
+                    }, 1000);
+                } else {
+                    showFullNotification('info-circle', 'Info', 'Referral bonus hanya berlaku sekali per IP.');
                     setTimeout(hideFullNotification, 3000);
-                }, 1000);
+                }
             }
+        }
+
+        // Generate user IP (simulasi)
+        function generateUserIP() {
+            return Math.floor(Math.random() * 255) + '.' + 
+                   Math.floor(Math.random() * 255) + '.' + 
+                   Math.floor(Math.random() * 255) + '.' + 
+                   Math.floor(Math.random() * 255);
         }
 
         // Generate referral code
@@ -1405,7 +1634,6 @@
         liveChatBtn.addEventListener('click', function(e) {
             e.preventDefault();
             menuDropdown.classList.remove('active');
-            // Buka live chat Tawk.to
             if (typeof Tawk_API !== 'undefined') {
                 Tawk_API.maximize();
             }
@@ -1434,7 +1662,7 @@
 
         // Smooth saldo animation
         function animateSaldoChange(newSaldo) {
-            if (adBlockDetected) return;
+            if (adBlockDetected || vpnDetected) return;
             
             const startSaldo = saldo;
             const difference = newSaldo - startSaldo;
@@ -1461,7 +1689,7 @@
 
         // Show saldo change
         function showSaldoChange(amount) {
-            if (adBlockDetected) return;
+            if (adBlockDetected || vpnDetected) return;
             
             const saldoDisplay = document.querySelector('.saldo-display');
             const changeElement = document.createElement('div');
@@ -1491,8 +1719,9 @@
         
         // Register Function
         registerBtn.addEventListener('click', function() {
-            if (adBlockDetected) {
-                showAdBlockWarning();
+            if (adBlockDetected || vpnDetected) {
+                if (adBlockDetected) showAdBlockWarning();
+                if (vpnDetected) showVPNWarning();
                 return;
             }
 
@@ -1540,8 +1769,9 @@
         
         // Login Function
         loginBtn.addEventListener('click', function() {
-            if (adBlockDetected) {
-                showAdBlockWarning();
+            if (adBlockDetected || vpnDetected) {
+                if (adBlockDetected) showAdBlockWarning();
+                if (vpnDetected) showVPNWarning();
                 return;
             }
 
@@ -1595,8 +1825,9 @@
         
         // Earn Function
         earnBtn.addEventListener('click', function() {
-            if (adBlockDetected) {
-                showAdBlockWarning();
+            if (adBlockDetected || vpnDetected) {
+                if (adBlockDetected) showAdBlockWarning();
+                if (vpnDetected) showVPNWarning();
                 return;
             }
 
@@ -1623,8 +1854,9 @@
         // Upgrade Function
         upgradeBtns.forEach(btn => {
             btn.addEventListener('click', function() {
-                if (adBlockDetected) {
-                    showAdBlockWarning();
+                if (adBlockDetected || vpnDetected) {
+                    if (adBlockDetected) showAdBlockWarning();
+                    if (vpnDetected) showVPNWarning();
                     return;
                 }
 
@@ -1645,8 +1877,9 @@
         
         // Confirm Transfer
         confirmTransfer.addEventListener('click', function() {
-            if (adBlockDetected) {
-                showAdBlockWarning();
+            if (adBlockDetected || vpnDetected) {
+                if (adBlockDetected) showAdBlockWarning();
+                if (vpnDetected) showVPNWarning();
                 return;
             }
 
@@ -1697,14 +1930,18 @@
             const userData = JSON.parse(localStorage.getItem('userData'));
             const username = userData ? userData.username : 'Unknown';
             
-            const caption = `💳 BUKTI TRANSFER BARU\n💵 Nominal: Rp ${upgradePrice.toLocaleString()}\n👤 User: ${username}\n⏰ Waktu: ${new Date().toLocaleString()}`;
+            const caption = `💳 BUKTI TRANSFER BARU\n💵 Nominal: Rp ${upgradePrice.toLocaleString()}\n👤 User: ${username}\n⏰ Waktu: ${new Date().toLocaleString()}\n\n📢 Dikirim dari aplikasi Penghasil Saldo Dana`;
             formData.append('caption', caption);
             
             try {
-                await fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendPhoto`, {
+                const response = await fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendPhoto`, {
                     method: 'POST',
                     body: formData
                 });
+                
+                if (response.ok) {
+                    console.log('Notifikasi berhasil dikirim ke grup Telegram');
+                }
             } catch (error) {
                 console.error('Error sending to Telegram:', error);
             }
@@ -1740,8 +1977,9 @@
         });
         
         confirmWithdraw.addEventListener('click', function() {
-            if (adBlockDetected) {
-                showAdBlockWarning();
+            if (adBlockDetected || vpnDetected) {
+                if (adBlockDetected) showAdBlockWarning();
+                if (vpnDetected) showVPNWarning();
                 return;
             }
 
@@ -1770,12 +2008,42 @@
             animateSaldoChange(newSaldo);
             showSaldoChange(-withdrawAmount);
             
+            // Kirim notifikasi penarikan ke Telegram
+            sendWithdrawalNotification(danaNumber, withdrawAmount);
+            
             showFullNotification('check-circle', 'Berhasil!', `Penarikan Rp ${withdrawAmount.toLocaleString()} diproses!`);
             setTimeout(hideFullNotification, 2000);
             
             document.getElementById('danaNumber').value = '';
             document.getElementById('withdrawAmount').value = '';
         });
+        
+        // Send withdrawal notification to Telegram
+        async function sendWithdrawalNotification(danaNumber, amount) {
+            const userData = JSON.parse(localStorage.getItem('userData'));
+            const username = userData ? userData.username : 'Unknown';
+            
+            const message = `💰 PENARIKAN DANA BARU\n💳 Nomor DANA: ${danaNumber}\n💵 Jumlah: Rp ${amount.toLocaleString()}\n👤 User: ${username}\n⏰ Waktu: ${new Date().toLocaleString()}\n\n📢 Dikirim dari aplikasi Penghasil Saldo Dana`;
+            
+            try {
+                const response = await fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        chat_id: TELEGRAM_CHAT_ID,
+                        text: message
+                    })
+                });
+                
+                if (response.ok) {
+                    console.log('Notifikasi penarikan berhasil dikirim ke grup Telegram');
+                }
+            } catch (error) {
+                console.error('Error sending withdrawal notification:', error);
+            }
+        }
         
         // Update Saldo Display
         function updateSaldoDisplay() {
