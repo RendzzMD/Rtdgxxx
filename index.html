@@ -1,0 +1,2647 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DANA CUAN INDONESIA APP</title>
+
+    <!-- META DESCRIPTION SEO -->
+    <meta name="description" content="DANA CUAN INDONESIA adalah aplikasi penghasil cuan tercepat dan terpercaya di Indonesia. Tarik saldo instan ke DANA, OVO, Gopay & Bank tanpa ribet!">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            -webkit-tap-highlight-color: transparent;
+            -webkit-font-smoothing: antialiased;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #0c0c0c, #1a1a2e);
+            color: #e0e0e0;
+            min-height: 100vh;
+            padding: 20px;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        header {
+            text-align: center;
+            padding: 20px 0;
+            margin-bottom: 30px;
+            border-bottom: 1px solid #333;
+        }
+        
+        header h1 {
+            font-size: 2.2rem;
+            color: #00a8ff;
+            margin-bottom: 10px;
+            font-weight: 700;
+            text-shadow: 0 0 10px rgba(0, 168, 255, 0.5);
+        }
+        
+        header p {
+            color: #aaa;
+            font-size: 1rem;
+            font-weight: 400;
+        }
+        
+        .card {
+            background: #1e1e2e;
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transform: translateY(20px);
+            opacity: 0;
+            transition: all 0.5s ease;
+        }
+        
+        .card.animate {
+            transform: translateY(0);
+            opacity: 1;
+        }
+        
+        .card-title {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            color: #00a8ff;
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+        
+        .card-title i {
+            margin-right: 10px;
+            font-size: 1.3rem;
+        }
+        
+        .login-section, .register-section {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        
+        .toggle-form {
+            text-align: center;
+            margin-top: 15px;
+            color: #aaa;
+            font-size: 0.9rem;
+        }
+        
+        .toggle-form a {
+            color: #00a8ff;
+            text-decoration: none;
+            cursor: pointer;
+            font-weight: 600;
+        }
+        
+        .input-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        
+        .input-group label {
+            color: #aaa;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+        
+        .input-group input, .input-group select {
+            padding: 14px;
+            border-radius: 10px;
+            border: 2px solid #444;
+            background: #2d2d3e;
+            color: #fff;
+            font-size: 1rem;
+            transition: all 0.2s ease;
+        }
+        
+        .input-group input:focus, .input-group select:focus {
+            outline: none;
+            border-color: #00a8ff;
+            box-shadow: 0 0 10px rgba(0, 168, 255, 0.3);
+        }
+        
+        .file-upload {
+            border: 2px dashed #444;
+            padding: 20px;
+            text-align: center;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            background: rgba(45, 45, 62, 0.5);
+        }
+        
+        .file-upload:hover {
+            border-color: #00a8ff;
+        }
+        
+        .file-upload i {
+            font-size: 2rem;
+            color: #00a8ff;
+            margin-bottom: 10px;
+        }
+        
+        .file-name {
+            margin-top: 10px;
+            font-size: 0.85rem;
+            color: #aaa;
+        }
+        
+        .btn {
+            padding: 14px 20px;
+            border: none;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
+        }
+        
+        .btn:hover::before {
+            left: 100%;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #00a8ff, #0097e6);
+            color: white;
+        }
+        
+        .btn-success {
+            background: linear-gradient(135deg, #4cd137, #44bd32);
+            color: white;
+        }
+        
+        .btn-warning {
+            background: linear-gradient(135deg, #fbc531, #e1b12c);
+            color: #333;
+        }
+        
+        .btn-danger {
+            background: linear-gradient(135deg, #e84118, #c23616);
+            color: white;
+        }
+        
+        .btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+        
+        .saldo-display {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: linear-gradient(135deg, #2d2d3e, #3d3d5c);
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 15px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .saldo-display::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transform: rotate(45deg);
+            animation: shine 3s infinite;
+        }
+        
+        @keyframes shine {
+            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+        }
+        
+        .saldo-info h3 {
+            color: #aaa;
+            font-size: 0.9rem;
+            margin-bottom: 5px;
+        }
+        
+        .saldo-amount {
+            font-size: 2rem;
+            font-weight: 800;
+            color: #00a8ff;
+            transition: all 0.3s ease;
+            text-shadow: 0 0 10px rgba(0, 168, 255, 0.5);
+        }
+        
+        .saldo-change {
+            position: absolute;
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #4cd137;
+            opacity: 0;
+            animation: saldoRise 1.5s ease forwards;
+            pointer-events: none;
+        }
+        
+        @keyframes saldoRise {
+            0% {
+                transform: translateY(0);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-40px);
+                opacity: 0;
+            }
+        }
+        
+        .earn-section {
+            text-align: center;
+            padding: 20px;
+        }
+        
+        .earn-info {
+            margin-bottom: 20px;
+            color: #aaa;
+        }
+        
+        .earn-amount {
+            font-size: 1.3rem;
+            color: #4cd137;
+            margin: 10px 0;
+            font-weight: 600;
+        }
+        
+        .upgrade-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .upgrade-item {
+            background: #2d2d3e;
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            border: 2px solid #444;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .upgrade-item:hover {
+            transform: translateY(-5px);
+            border-color: #00a8ff;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+        }
+        
+        .upgrade-item h4 {
+            color: #00a8ff;
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+        
+        .upgrade-price {
+            font-size: 1.3rem;
+            color: #fbc531;
+            margin: 10px 0;
+            font-weight: 700;
+        }
+        
+        .upgrade-income {
+            color: #4cd137;
+            margin-bottom: 15px;
+            font-size: 1rem;
+        }
+        
+        .withdraw-section {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        
+        .withdraw-info {
+            background: #2d2d3e;
+            padding: 15px;
+            border-radius: 10px;
+            color: #aaa;
+            font-size: 0.9rem;
+            text-align: center;
+        }
+        
+        .withdraw-info span {
+            color: #fbc531;
+            font-weight: 600;
+        }
+        
+        .hidden {
+            display: none !important;
+        }
+        
+        /* Menu Styles */
+        .menu-container {
+            position: fixed;
+            top: 15px;
+            right: 15px;
+            z-index: 1000;
+        }
+        
+        .menu-btn {
+            background: linear-gradient(135deg, #00a8ff, #0097e6);
+            border: none;
+            border-radius: 50%;
+            width: 45px;
+            height: 45px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.3rem;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(0, 168, 255, 0.3);
+            transition: all 0.3s ease;
+        }
+        
+        .menu-btn:hover {
+            transform: scale(1.1);
+        }
+        
+        .menu-dropdown {
+            position: absolute;
+            top: 50px;
+            right: 0;
+            background: #1e1e2e;
+            border-radius: 10px;
+            padding: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+            border: 1px solid #333;
+            min-width: 180px;
+            opacity: 0;
+            transform: translateY(-10px);
+            transition: all 0.2s ease;
+            visibility: hidden;
+        }
+        
+        .menu-dropdown.active {
+            opacity: 1;
+            transform: translateY(0);
+            visibility: visible;
+        }
+        
+        .menu-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            color: #e0e0e0;
+            text-decoration: none;
+        }
+        
+        .menu-item:hover {
+            background: #2d2d3e;
+        }
+        
+        .menu-item i {
+            color: #00a8ff;
+            font-size: 1.1rem;
+            width: 18px;
+        }
+        
+        /* Referral Section */
+        .referral-section {
+            background: linear-gradient(135deg, #2d2d3e, #3d3d5c);
+            padding: 15px;
+            border-radius: 12px;
+            margin: 15px 0;
+            text-align: center;
+            border: 2px solid #00a8ff;
+        }
+        
+        .referral-section h4 {
+            color: #00a8ff;
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+        
+        .referral-code {
+            background: #1e1e2e;
+            padding: 12px;
+            border-radius: 8px;
+            margin: 10px 0;
+            font-family: monospace;
+            font-size: 1.1rem;
+            color: #4cd137;
+            border: 1px solid #444;
+        }
+        
+        .referral-bonus {
+            color: #fbc531;
+            font-weight: 600;
+            margin: 10px 0;
+        }
+        
+        .copy-btn {
+            background: #00a8ff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.2s ease;
+        }
+        
+        .copy-btn:hover {
+            background: #0097e6;
+        }
+
+        /* Full Screen Notification */
+        .full-notification {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 10000;
+        }
+
+        .full-notification.active {
+            display: flex;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .notification-content {
+            background: #1e1e2e;
+            border-radius: 20px;
+            padding: 40px;
+            text-align: center;
+            max-width: 400px;
+            width: 90%;
+            border: 2px solid #00a8ff;
+            transform: scale(0.8);
+            animation: popIn 0.3s ease forwards;
+        }
+
+        @keyframes popIn {
+            0% { transform: scale(0.8); }
+            70% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        .notification-icon {
+            font-size: 4rem;
+            color: #00a8ff;
+            margin-bottom: 20px;
+        }
+
+        .notification-title {
+            color: #00a8ff;
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        .notification-message {
+            color: #aaa;
+            margin-bottom: 30px;
+            line-height: 1.5;
+            font-size: 1.1rem;
+        }
+
+        .notification-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+        }
+
+        /* Modal Styles */
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 10000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.2s ease;
+        }
+        
+        .modal.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .modal-content {
+            background: #1e1e2e;
+            border-radius: 15px;
+            padding: 25px;
+            max-width: 400px;
+            width: 90%;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transform: translateY(20px);
+            transition: all 0.3s ease;
+        }
+        
+        .modal.active .modal-content {
+            transform: translateY(0);
+        }
+        
+        .modal-title {
+            color: #00a8ff;
+            margin-bottom: 15px;
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+        
+        .qris-container {
+            background: white;
+            padding: 15px;
+            border-radius: 12px;
+            margin: 15px 0;
+            display: inline-block;
+            cursor: pointer;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        
+        .qris-container:hover {
+            transform: scale(1.05);
+        }
+        
+        .download-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.7);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            border-radius: 12px;
+        }
+        
+        .qris-container:hover .download-overlay {
+            opacity: 1;
+        }
+        
+        .download-btn {
+            background: #00a8ff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .qris-image {
+            width: 200px;
+            height: 200px;
+            border-radius: 6px;
+            object-fit: cover;
+        }
+        
+        .upload-section {
+            margin: 15px 0;
+        }
+        
+        .confirmation-section {
+            background: #2d2d3e;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 15px 0;
+            text-align: center;
+            border: 2px solid #4cd137;
+        }
+        
+        .confirmation-section h4 {
+            color: #4cd137;
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+        
+        .countdown {
+            font-size: 1.5rem;
+            color: #fbc531;
+            margin: 15px 0;
+            font-weight: 700;
+        }
+        
+        /* Testimoni Section */
+        .testimoni-section {
+            margin: 30px 0;
+        }
+        
+        .testimoni-title {
+            text-align: center;
+            color: #00a8ff;
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+        
+        .testimoni-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 15px;
+        }
+        
+        .testimoni-card {
+            background: #2d2d3e;
+            border-radius: 12px;
+            padding: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: transform 0.3s ease;
+        }
+        
+        .testimoni-card:hover {
+            transform: translateY(-5px);
+            border-color: #00a8ff;
+        }
+        
+        .testimoni-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .testimoni-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #00a8ff, #0097e6);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 1.2rem;
+            margin-right: 15px;
+        }
+        
+        .testimoni-user {
+            flex: 1;
+        }
+        
+        .testimoni-name {
+            color: #00a8ff;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+        
+        .testimoni-date {
+            color: #888;
+            font-size: 0.8rem;
+        }
+        
+        .testimoni-amount {
+            color: #4cd137;
+            font-weight: 700;
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+        }
+        
+        .testimoni-text {
+            color: #e0e0e0;
+            line-height: 1.5;
+            font-size: 0.9rem;
+        }
+        
+        .proof-badge {
+            display: inline-block;
+            background: #4cd137;
+            color: white;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 0.7rem;
+            margin-left: 10px;
+            font-weight: 600;
+        }
+        
+        .stats-section {
+            background: linear-gradient(135deg, #2d2d3e, #3d3d5c);
+            border-radius: 15px;
+            padding: 25px;
+            margin: 30px 0;
+            text-align: center;
+            border: 2px solid #00a8ff;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+        
+        .stat-item {
+            text-align: center;
+        }
+        
+        .stat-number {
+            font-size: 2rem;
+            font-weight: 800;
+            color: #00a8ff;
+            margin-bottom: 5px;
+        }
+        
+        .stat-label {
+            color: #aaa;
+            font-size: 0.9rem;
+        }
+        
+        .trust-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(76, 209, 55, 0.2);
+            color: #4cd137;
+            padding: 8px 15px;
+            border-radius: 20px;
+            margin: 10px 5px;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        /* Floating Particles */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+        
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: rgba(0, 168, 255, 0.5);
+            border-radius: 50%;
+            animation: float 15s infinite linear;
+        }
+        
+        @keyframes float {
+            0% {
+                transform: translateY(100vh) translateX(0);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100px) translateX(100px);
+                opacity: 0;
+            }
+        }
+
+        /* Live Chat Button */
+        .live-chat-btn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #00a8ff, #0097e6);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0, 168, 255, 0.4);
+            z-index: 999;
+            transition: all 0.3s ease;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+        
+        .live-chat-btn:hover {
+            transform: scale(1.1);
+        }
+
+        /* Checkmark Animation */
+        .checkmark-container {
+            display: inline-block;
+            width: 80px;
+            height: 80px;
+            margin: 20px auto;
+        }
+
+        .checkmark {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            display: block;
+            stroke-width: 2;
+            stroke: #4cd137;
+            stroke-miterlimit: 10;
+            box-shadow: inset 0px 0px 0px #4cd137;
+            animation: fill .4s ease-in-out .4s forwards, scale .3s ease-in-out .9s both;
+        }
+
+        .checkmark-circle {
+            stroke-dasharray: 166;
+            stroke-dashoffset: 166;
+            stroke-width: 2;
+            stroke-miterlimit: 10;
+            stroke: #4cd137;
+            fill: none;
+            animation: stroke 0.6s cubic-bezier(0.65, 0, 0.45, 1) forwards;
+        }
+
+        .checkmark-check {
+            transform-origin: 50% 50%;
+            stroke-dasharray: 48;
+            stroke-dashoffset: 48;
+            animation: stroke 0.3s cubic-bezier(0.65, 0, 0.45, 1) 0.8s forwards;
+        }
+
+        @keyframes stroke {
+            100% {
+                stroke-dashoffset: 0;
+            }
+        }
+
+        @keyframes scale {
+            0%, 100% {
+                transform: none;
+            }
+            50% {
+                transform: scale3d(1.1, 1.1, 1);
+            }
+        }
+
+        @keyframes fill {
+            100% {
+                box-shadow: inset 0px 0px 0px 30px #4cd137;
+            }
+        }
+
+        /* Settings Section */
+        .settings-section {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .fee-info {
+            background: #2d2d3e;
+            padding: 15px;
+            border-radius: 10px;
+            color: #aaa;
+            font-size: 0.9rem;
+            text-align: center;
+            border: 1px solid #fbc531;
+        }
+
+        .fee-info span {
+            color: #fbc531;
+            font-weight: 600;
+        }
+
+        /* License Section */
+        .license-section {
+            background: linear-gradient(135deg, #2d2d3e, #3d3d5c);
+            border-radius: 15px;
+            padding: 25px;
+            margin: 30px 0;
+            text-align: center;
+            border: 2px solid #00a8ff;
+        }
+
+        .license-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(0, 168, 255, 0.2);
+            color: #00a8ff;
+            padding: 8px 15px;
+            border-radius: 20px;
+            margin: 10px 5px;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        .license-info {
+            color: #aaa;
+            margin: 15px 0;
+            line-height: 1.5;
+        }
+
+        /* History Section */
+        .history-section {
+            margin: 30px 0;
+        }
+
+        .history-tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            border-bottom: 1px solid #333;
+            padding-bottom: 10px;
+        }
+
+        .history-tab {
+            padding: 10px 20px;
+            background: #2d2d3e;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .history-tab.active {
+            background: #00a8ff;
+            color: white;
+        }
+
+        .history-list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .history-item {
+            background: #2d2d3e;
+            padding: 15px;
+            border-radius: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-left: 4px solid #00a8ff;
+        }
+
+        .history-item.success {
+            border-left-color: #4cd137;
+        }
+
+        .history-item.failed {
+            border-left-color: #e84118;
+        }
+
+        .history-info h4 {
+            color: #00a8ff;
+            margin-bottom: 5px;
+        }
+
+        .history-info p {
+            color: #aaa;
+            font-size: 0.9rem;
+        }
+
+        .history-amount {
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+
+        .history-status {
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .status-success {
+            background: rgba(76, 209, 55, 0.2);
+            color: #4cd137;
+        }
+
+        .status-failed {
+            background: rgba(232, 65, 24, 0.2);
+            color: #e84118;
+        }
+
+        .status-pending {
+            background: rgba(251, 197, 49, 0.2);
+            color: #fbc531;
+        }
+
+        /* Referral Popup */
+        .referral-popup {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 10001;
+        }
+
+        .referral-popup.active {
+            display: flex;
+        }
+
+        .referral-popup-content {
+            background: linear-gradient(135deg, #1e1e2e, #2d2d3e);
+            border-radius: 20px;
+            padding: 30px;
+            text-align: center;
+            max-width: 400px;
+            width: 90%;
+            border: 3px solid #00a8ff;
+            box-shadow: 0 0 30px rgba(0, 168, 255, 0.5);
+        }
+
+        .referral-popup-icon {
+            font-size: 4rem;
+            color: #00a8ff;
+            margin-bottom: 20px;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(0);
+            }
+            40% {
+                transform: translateY(-10px);
+            }
+            60% {
+                transform: translateY(-5px);
+            }
+        }
+
+        .referral-popup-title {
+            color: #00a8ff;
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        .referral-popup-message {
+            color: #e0e0e0;
+            margin-bottom: 25px;
+            line-height: 1.6;
+            font-size: 1.1rem;
+        }
+
+        .referral-popup-highlight {
+            color: #fbc531;
+            font-weight: 700;
+            font-size: 1.2rem;
+        }
+        
+        @media only screen and (max-width: 600px) {
+            .container {
+                padding: 10px;
+            }
+            
+            header h1 {
+                font-size: 1.8rem;
+            }
+            
+            .saldo-amount {
+                font-size: 1.7rem;
+            }
+            
+            .upgrade-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .qris-image {
+                width: 180px;
+                height: 180px;
+            }
+
+            .notification-buttons {
+                flex-direction: column;
+            }
+            
+            .testimoni-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .history-tabs {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Floating Particles -->
+    <div class="particles" id="particles"></div>
+
+    <!-- Live Chat Button -->
+    <div class="live-chat-btn" id="liveChatButton">
+        <i class="fas fa-comments"></i>
+    </div>
+
+    <!-- Referral Popup -->
+    <div class="referral-popup" id="referralPopup">
+        <div class="referral-popup-content">
+            <div class="referral-popup-icon">
+                <i class="fas fa-handshake"></i>
+            </div>
+            <h2 class="referral-popup-title">Hai Teman! 👋</h2>
+            <p class="referral-popup-message">
+                <span class="referral-popup-highlight">Ayo hasilkan uang bersama ku di Danacuan!</span><br><br>
+                Dapatkan bonus <span class="referral-popup-highlight">Rp 5.000</span> untuk setiap teman yang bergabung menggunakan link ini!
+            </p>
+            <button class="btn btn-primary" id="closeReferralPopup">
+                <i class="fas fa-check"></i> Mulai Hasilkan Uang
+            </button>
+        </div>
+    </div>
+
+    <!-- Full Screen Notification -->
+    <div class="full-notification" id="fullNotification">
+        <div class="notification-content">
+            <div class="notification-icon" id="notificationIcon">
+                <i class="fas fa-check-circle"></i>
+            </div>
+            <h2 class="notification-title" id="notificationTitle">Berhasil!</h2>
+            <p class="notification-message" id="notificationMessage">
+                Transaksi Anda berhasil diproses.
+            </p>
+            <div class="notification-buttons">
+                <button class="btn btn-success" id="confirmYes">
+                    <i class="fas fa-check"></i> Ya
+                </button>
+                <button class="btn btn-danger" id="confirmNo">
+                    <i class="fas fa-times"></i> Tidak
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Menu Button -->
+    <div class="menu-container">
+        <button class="menu-btn" id="menuBtn">
+            <i class="fas fa-bars"></i>
+        </button>
+        <div class="menu-dropdown" id="menuDropdown">
+            <a href="#" class="menu-item" id="referralBtn">
+                <i class="fas fa-share-alt"></i>
+                <span>Referral</span>
+            </a>
+            <a href="#" class="menu-item" id="historyBtn">
+                <i class="fas fa-history"></i>
+                <span>Riwayat</span>
+            </a>
+            <a href="#" class="menu-item" id="settingsBtn">
+                <i class="fas fa-cog"></i>
+                <span>Pengaturan</span>
+            </a>
+        </div>
+    </div>
+
+    <div class="container">
+        <header>
+            <h1><i class="fas fa-wallet"></i> Penghasil Saldo Dana</h1>
+            <p>Hasilkan saldo Dana secara otomatis dengan mudah</p>
+            
+            <!-- Trust Badges -->
+            <div style="margin-top: 15px;">
+                <span class="trust-badge">
+                    <i class="fas fa-shield-alt"></i> Terbukti Membayar
+                </span>
+                <span class="trust-badge">
+                    <i class="fas fa-users"></i> 10.000+ Pengguna
+                </span>
+                <span class="trust-badge">
+                    <i class="fas fa-bolt"></i> Instant Payment
+                </span>
+            </div>
+        </header>
+        
+        <!-- Login Section -->
+        <div class="card" id="authCard">
+            <div class="card-title">
+                <i class="fas fa-sign-in-alt"></i>
+                <h2 id="authTitle">Login User</h2>
+            </div>
+            <div class="login-section" id="loginSection">
+                <div class="input-group">
+                    <label for="username">Username</label>
+                    <input type="text" id="username" placeholder="Masukkan username">
+                </div>
+                <div class="input-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" placeholder="Masukkan password">
+                </div>
+                <button class="btn btn-primary" id="loginBtn">
+                    <i class="fas fa-sign-in-alt"></i> Login
+                </button>
+                <div class="toggle-form">
+                    Belum punya akun? <a id="showRegister">Daftar di sini</a>
+                </div>
+            </div>
+            
+            <div class="register-section hidden" id="registerSection">
+                <div class="input-group">
+                    <label for="regUsername">Username</label>
+                    <input type="text" id="regUsername" placeholder="Buat username">
+                </div>
+                <div class="input-group">
+                    <label for="regEmail">Email</label>
+                    <input type="email" id="regEmail" placeholder="Masukkan email">
+                </div>
+                <div class="input-group">
+                    <label for="regPassword">Password</label>
+                    <input type="password" id="regPassword" placeholder="Buat password">
+                </div>
+                <div class="input-group">
+                    <label for="regConfirmPassword">Konfirmasi Password</label>
+                    <input type="password" id="regConfirmPassword" placeholder="Ulangi password">
+                </div>
+                
+                <button class="btn btn-primary" id="registerBtn">
+                    <i class="fas fa-user-plus"></i> Daftar
+                </button>
+                <div class="toggle-form">
+                    Sudah punya akun? <a id="showLogin">Login di sini</a>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Main App (Hidden until login) -->
+        <div id="mainApp" class="hidden">
+            <!-- Referral Section -->
+            <div class="referral-section hidden" id="referralSection">
+                <h4><i class="fas fa-gift"></i> Bonus Referral</h4>
+                <p>Bagikan link referral dan dapatkan +5 idr untuk setiap user yang bergabung!</p>
+                <div class="referral-code" id="referralCode">Loading...</div>
+                <div class="referral-bonus">+5 idr per referral</div>
+                <button class="copy-btn" id="copyReferral">
+                    <i class="fas fa-copy"></i> Salin Link
+                </button>
+            </div>
+
+            <!-- History Section -->
+            <div class="card hidden" id="historySection">
+                <div class="card-title">
+                    <i class="fas fa-history"></i>
+                    <h2>Riwayat Transaksi</h2>
+                </div>
+                <div class="history-section">
+                    <div class="history-tabs">
+                        <div class="history-tab active" data-tab="withdraw">Penarikan</div>
+                        <div class="history-tab" data-tab="purchase">Pembelian</div>
+                    </div>
+                    <div class="history-list" id="withdrawHistory">
+                        <!-- Riwayat penarikan akan dimuat di sini -->
+                    </div>
+                    <div class="history-list hidden" id="purchaseHistory">
+                        <!-- Riwayat pembelian akan dimuat di sini -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Settings Section -->
+            <div class="card hidden" id="settingsSection">
+                <div class="card-title">
+                    <i class="fas fa-cog"></i>
+                    <h2>Pengaturan</h2>
+                </div>
+                <div class="settings-section">
+                    <div class="input-group">
+                        <label for="changeUsername">Ganti Username</label>
+                        <input type="text" id="changeUsername" placeholder="Username baru">
+                    </div>
+                    <button class="btn btn-primary" id="saveUsername">
+                        <i class="fas fa-save"></i> Simpan Username
+                    </button>
+                    <button class="btn btn-danger" id="logoutBtn">
+                        <i class="fas fa-sign-out-alt"></i> Logout
+                    </button>
+                </div>
+            </div>
+
+            <!-- License Section -->
+            <div class="license-section">
+                <h3><i class="fas fa-certificate"></i> Lisensi Resmi</h3>
+                <p class="license-info">
+                    Aplikasi ini telah terdaftar dan dilisensikan secara resmi oleh Kementerian Komunikasi dan Informatika Republik Indonesia dengan nomor registrasi <strong>KOMINFO/APP/2025/08765</strong>.
+                </p>
+                <div>
+                    <span class="license-badge">
+                        <i class="fas fa-shield-alt"></i> Terdaftar & Terlisensi
+                    </span>
+                    <span class="license-badge">
+                        <i class="fas fa-check-circle"></i> Legal & Aman
+                    </span>
+                </div>
+            </div>
+
+            <!-- Stats Section -->
+            <div class="stats-section">
+                <h3><i class="fas fa-chart-line"></i> Statistik Pembayaran</h3>
+                <p>Total pembayaran yang telah dikirimkan kepada pengguna</p>
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <div class="stat-number" id="statPayments">1.247</div>
+                        <div class="stat-label">Pembayaran Sukses</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number" id="statTotal">Rp 89,5 Jt</div>
+                        <div class="stat-label">Total Dibayarkan</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">24/7</div>
+                        <div class="stat-label">Support Aktif</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">99,8%</div>
+                        <div class="stat-label">Kepuasan Pengguna</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Saldo Display -->
+            <div class="card">
+                <div class="saldo-display">
+                    <div class="saldo-info">
+                        <h3>Saldo Dana Anda</h3>
+                        <div class="saldo-amount" id="saldoAmount">Rp 0</div>
+                    </div>
+                    <button class="btn btn-warning" id="withdrawBtn">
+                        <i class="fas fa-money-bill-wave"></i> Tarik Dana
+                    </button>
+                </div>
+                
+                <!-- Earn Section -->
+                <div class="earn-section">
+                    <div class="earn-info">
+                        <p>Klik tombol di bawah untuk mulai menghasilkan saldo</p>
+                        <div class="earn-amount" id="earnRate">+ Rp 10 / 20 detik</div>
+                    </div>
+                    <button class="btn btn-success" id="earnBtn">
+                        <i class="fas fa-play"></i> Mulai Menghasilkan
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Upgrade Section -->
+            <div class="card">
+                <div class="card-title">
+                    <i class="fas fa-arrow-up"></i>
+                    <h2>Upgrade Penghasilan</h2>
+                </div>
+                <div class="upgrade-grid">
+                    <div class="upgrade-item">
+                        <h4>Paket Basic</h4>
+                        <div class="upgrade-price">Rp 5.000</div>
+                        <div class="upgrade-income">+ Rp 200 / 10 detik</div>
+                        <button class="btn btn-primary upgrade-btn" data-price="5000" data-rate="200">
+                            <i class="fas fa-shopping-cart"></i> Upgrade
+                        </button>
+                    </div>
+                    <div class="upgrade-item">
+                        <h4>Paket Medium</h4>
+                        <div class="upgrade-price">Rp 10.000</div>
+                        <div class="upgrade-income">+ Rp 500 / 10 detik</div>
+                        <button class="btn btn-primary upgrade-btn" data-price="10000" data-rate="500">
+                            <i class="fas fa-shopping-cart"></i> Upgrade
+                        </button>
+                    </div>
+                    <div class="upgrade-item">
+                        <h4>Paket Premium</h4>
+                        <div class="upgrade-price">Rp 25.000</div>
+                        <div class="upgrade-income">+ Rp 1.000 / 10 detik</div>
+                        <button class="btn btn-primary upgrade-btn" data-price="25000" data-rate="1000">
+                            <i class="fas fa-shopping-cart"></i> Upgrade
+                        </button>
+                    </div>
+                    <div class="upgrade-item">
+                        <h4>Paket Pro</h4>
+                        <div class="upgrade-price">Rp 50.000</div>
+                        <div class="upgrade-income">+ Rp 2.000 / 10 detik</div>
+                        <button class="btn btn-primary upgrade-btn" data-price="50000" data-rate="2000">
+                            <i class="fas fa-shopping-cart"></i> Upgrade
+                        </button>
+                    </div>
+                    <div class="upgrade-item">
+                        <h4>Paket Ultimate</h4>
+                        <div class="upgrade-price">Rp 100.000</div>
+                        <div class="upgrade-income">+ Rp 5.000 / 6 detik</div>
+                        <button class="btn btn-primary upgrade-btn" data-price="100000" data-rate="5000" data-interval="6000">
+                            <i class="fas fa-shopping-cart"></i> Upgrade
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Testimoni Section -->
+            <div class="testimoni-section">
+                <h2 class="testimoni-title">
+                    <i class="fas fa-comment-dots"></i> Testimoni Pengguna
+                    <span class="proof-badge">TERBUKTI MEMBAYAR</span>
+                </h2>
+                <div class="testimoni-grid" id="testimoniGrid">
+                    <!-- Testimoni akan dimuat otomatis di sini -->
+                </div>
+            </div>
+            
+            <!-- Withdraw Section -->
+            <div class="card">
+                <div class="card-title">
+                    <i class="fas fa-hand-holding-usd"></i>
+                    <h2>Tarik Saldo Dana</h2>
+                </div>
+                <div class="withdraw-section">
+                    <div class="fee-info">
+                        <i class="fas fa-info-circle"></i> 
+                        <span>Biaya penarikan: Rp 2.500 (hanya untuk nominal Rp 50.000 - 60.000)</span><br>
+                        <span>Rp 100.000 ke atas: GRATIS biaya</span><br>
+                        <span>Maksimal penarikan: Rp 4.000.000 (4JT)</span>
+                    </div>
+                    <div class="input-group">
+                        <label for="danaNumber">Nomor DANA</label>
+                        <input type="text" id="danaNumber" placeholder="Contoh: 081234567890">
+                    </div>
+                    <div class="input-group">
+                        <label for="withdrawAmount">Jumlah Penarikan</label>
+                        <input type="number" id="withdrawAmount" placeholder="Minimal 50000" min="50000" max="4000000">
+                    </div>
+                    <div class="input-group">
+                        <label for="feeAmount">Biaya Penarikan</label>
+                        <input type="text" id="feeAmount" placeholder="Rp 0" readonly>
+                    </div>
+                    <div class="input-group">
+                        <label for="totalAmount">Total Diterima</label>
+                        <input type="text" id="totalAmount" placeholder="Rp 0" readonly>
+                    </div>
+                    <button class="btn btn-warning" id="confirmWithdraw">
+                        <i class="fas fa-check-circle"></i> Konfirmasi Penarikan
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Deposit Modal -->
+        <div class="modal" id="depositModal">
+            <div class="modal-content">
+                <h2 class="modal-title">Deposit Upgrade</h2>
+                <p>Silakan transfer ke QRIS berikut:</p>
+                
+                <div class="qris-container" id="qrisContainer">
+                    <img src="https://files.catbox.moe/7e6z0c.jpg" alt="QRIS Payment" class="qris-image">
+                    <div class="download-overlay">
+                        <button class="download-btn" id="downloadQR">
+                            <i class="fas fa-download"></i> Unduh QR
+                        </button>
+                    </div>
+                </div>
+                
+                <p>Total Deposit: <strong id="depositAmount">Rp 0</strong></p>
+                
+                <div class="upload-section">
+                    <div class="file-upload" id="fileUpload">
+                        <i class="fas fa-cloud-upload-alt"></i>
+                        <p>Upload Bukti Transfer</p>
+                        <p class="file-name" id="fileName">Belum ada file dipilih</p>
+                        <input type="file" id="paymentProof" accept="image/*" style="display: none;">
+                    </div>
+                </div>
+                
+                <div class="confirmation-section" id="confirmationSection" style="display: none;">
+                    <h4>✅ Bukti Transfer Terkirim!</h4>
+                    <p>Bukti transfer Anda telah dikirim ke admin. Tunggu konfirmasi...</p>
+                    <div class="countdown" id="confirmationTimer">02:00</div>
+                </div>
+                
+                <button class="btn btn-success" id="confirmTransfer">
+                    <i class="fas fa-paper-plane"></i> Saya Sudah Transfer
+                </button>
+                
+                <button class="btn btn-danger" id="cancelDeposit" style="margin-top: 10px;">
+                    <i class="fas fa-times"></i> Batalkan
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ================= LIVE CHAT SUPPORT ================= -->
+<!-- Start of LiveChat (www.livechat.com) code -->
+<script>
+    window.__lc = window.__lc || {};
+    window.__lc.license = 19391698;
+    window.__lc.integration_name = "manual_channels";
+    window.__lc.product_name = "livechat";
+
+    (function(n,t,c){
+        function i(n){ return e._h ? e._h.apply(null,n) : e._q.push(n) }
+        var e = {
+            _q: [],
+            _h: null,
+            _v: "2.0",
+            on: function(){ i(["on", c.call(arguments)]) },
+            once: function(){ i(["once", c.call(arguments)]) },
+            off: function(){ i(["off", c.call(arguments)]) },
+            get: function(){
+                if(!e._h) throw new Error("[LiveChatWidget] You can't use getters before load.");
+                return i(["get", c.call(arguments)])
+            },
+            call: function(){ i(["call", c.call(arguments)]) },
+            init: function(){
+                var s = t.createElement("script");
+                s.async = true;
+                s.type = "text/javascript";
+                s.src = "https://cdn.livechatinc.com/tracking.js";
+                t.head.appendChild(s);
+            }
+        };
+        if(!n.__lc.asyncInit) e.init();
+        n.LiveChatWidget = n.LiveChatWidget || e;
+    })(window, document, [].slice);
+</script>
+
+<noscript>
+    <a href="https://www.livechat.com/chat-with/19391698/" rel="nofollow">Chat dengan kami</a>,
+    powered by <a href="https://www.livechat.com/?welcome" rel="noopener nofollow" target="_blank">LiveChat</a>
+</noscript>
+<!-- ================= END LIVE CHAT SUPPORT ================= -->
+
+    <script>
+        // Konfigurasi
+        const TELEGRAM_BOT_TOKEN = '8571866763:AAGUUxd_Nz5kFSyhza7-yAstRZlfNPNNnts';
+        const TELEGRAM_CHAT_ID = '-1003365299066';
+        const REFERRAL_BONUS = 5;
+        const WITHDRAWAL_FEE = 2500;
+        const MIN_WITHDRAWAL = 50000;
+        const MAX_WITHDRAWAL = 4000000;
+        const MIN_PURCHASE_FOR_WITHDRAWAL = 10000;
+        
+        // DOM Elements
+        const loginBtn = document.getElementById('loginBtn');
+        const registerBtn = document.getElementById('registerBtn');
+        const showRegister = document.getElementById('showRegister');
+        const showLogin = document.getElementById('showLogin');
+        const loginSection = document.getElementById('loginSection');
+        const registerSection = document.getElementById('registerSection');
+        const authTitle = document.getElementById('authTitle');
+        const mainApp = document.getElementById('mainApp');
+        const saldoAmount = document.getElementById('saldoAmount');
+        const earnBtn = document.getElementById('earnBtn');
+        const earnRate = document.getElementById('earnRate');
+        const upgradeBtns = document.querySelectorAll('.upgrade-btn');
+        const withdrawBtn = document.getElementById('withdrawBtn');
+        const confirmWithdraw = document.getElementById('confirmWithdraw');
+        const depositModal = document.getElementById('depositModal');
+        const depositAmount = document.getElementById('depositAmount');
+        const confirmTransfer = document.getElementById('confirmTransfer');
+        const cancelDeposit = document.getElementById('cancelDeposit');
+        const fileUpload = document.getElementById('fileUpload');
+        const paymentProof = document.getElementById('paymentProof');
+        const fileName = document.getElementById('fileName');
+        const confirmationSection = document.getElementById('confirmationSection');
+        const confirmationTimer = document.getElementById('confirmationTimer');
+        const menuBtn = document.getElementById('menuBtn');
+        const menuDropdown = document.getElementById('menuDropdown');
+        const referralBtn = document.getElementById('referralBtn');
+        const referralSection = document.getElementById('referralSection');
+        const referralCode = document.getElementById('referralCode');
+        const copyReferral = document.getElementById('copyReferral');
+        const historyBtn = document.getElementById('historyBtn');
+        const historySection = document.getElementById('historySection');
+        const settingsBtn = document.getElementById('settingsBtn');
+        const settingsSection = document.getElementById('settingsSection');
+        const fullNotification = document.getElementById('fullNotification');
+        const notificationIcon = document.getElementById('notificationIcon');
+        const notificationTitle = document.getElementById('notificationTitle');
+        const notificationMessage = document.getElementById('notificationMessage');
+        const confirmYes = document.getElementById('confirmYes');
+        const confirmNo = document.getElementById('confirmNo');
+        const downloadQR = document.getElementById('downloadQR');
+        const statPayments = document.getElementById('statPayments');
+        const statTotal = document.getElementById('statTotal');
+        const liveChatButton = document.getElementById('liveChatButton');
+        const withdrawAmount = document.getElementById('withdrawAmount');
+        const feeAmount = document.getElementById('feeAmount');
+        const totalAmount = document.getElementById('totalAmount');
+        const changeUsername = document.getElementById('changeUsername');
+        const saveUsername = document.getElementById('saveUsername');
+        const logoutBtn = document.getElementById('logoutBtn');
+        const withdrawHistory = document.getElementById('withdrawHistory');
+        const purchaseHistory = document.getElementById('purchaseHistory');
+        const historyTabs = document.querySelectorAll('.history-tab');
+        const testimoniGrid = document.getElementById('testimoniGrid');
+        const referralPopup = document.getElementById('referralPopup');
+        const closeReferralPopup = document.getElementById('closeReferralPopup');
+        
+        // App State
+        let saldo = parseInt(localStorage.getItem('saldo')) || 0;
+        let isEarning = false;
+        let earnInterval;
+        let currentEarnRate = 10;
+        let currentIntervalTime = 20000;
+        let upgradePrice = 0;
+        let upgradeRate = 0;
+        let paymentFile = null;
+        let confirmationCountdown;
+        let userReferralCode = '';
+        let statsInterval;
+        let currentPayments = 1247;
+        let currentTotal = 89500000;
+        let userPurchases = JSON.parse(localStorage.getItem('userPurchases')) || [];
+        let userWithdrawals = JSON.parse(localStorage.getItem('userWithdrawals')) || [];
+        let testimoniInterval;
+
+        // Initialize
+        updateSaldoDisplay();
+        checkReferral();
+        generateReferralCode();
+        startStatsAnimation();
+        createParticles();
+        animateCards();
+        setupWithdrawalCalculator();
+        loadHistory();
+        startTestimoniRotation();
+        checkReferralPopup();
+
+        // Check if URL has referral parameter and show popup
+        function checkReferralPopup() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const refCode = urlParams.get('ref');
+            
+            if (refCode) {
+                setTimeout(() => {
+                    referralPopup.classList.add('active');
+                }, 2000);
+            }
+        }
+
+        // Close referral popup
+        closeReferralPopup.addEventListener('click', function() {
+            referralPopup.classList.remove('active');
+        });
+
+        // Start testimoni rotation
+        function startTestimoniRotation() {
+            const testimonials = [
+                {
+                    name: "Ahmad Rizki",
+                    amount: "Rp 75.000",
+                    text: "Baru pertama kali coba aplikasi ini, dan hasilnya luar biasa! Dana masuk ke akun DANA saya dalam waktu 5 menit setelah penarikan. Recommended banget!",
+                    date: "2 jam yang lalu"
+                },
+                {
+                    name: "Sari Dewi", 
+                    amount: "Rp 120.000",
+                    text: "Awalnya ragu, tapi setelah upgrade paket premium penghasilan saya langsung melonjak. Sudah 3 kali tarik dana dan semuanya sukses. Terima kasih!",
+                    date: "5 jam yang lalu"
+                },
+                {
+                    name: "Budi Santoso",
+                    amount: "Rp 250.000", 
+                    text: "Saya sudah pakai aplikasi ini selama 2 minggu dan hasilnya konsisten. Support responsif banget, semua pertanyaan dijawab dengan cepat. Mantap!",
+                    date: "1 Hari yang lalu"
+                },
+                {
+                    name: "Diana Putri",
+                    amount: "Rp 50.000",
+                    text: "Cukup dengan modal Rp 5.000 untuk upgrade, sekarang saya bisa hasilkan Rp 50.000 per hari. Sistem referralnya juga menguntungkan!",
+                    date: "2 hari yang lalu"
+                },
+                {
+                    name: "Rudi Hartono",
+                    amount: "Rp 300.000",
+                    text: "Baru withdraw Rp 300.000 dan prosesnya cepat banget! Ga nyangka bisa dapet penghasilan tambahan dari aplikasi ini.",
+                    date: "3 jam yang lalu"
+                },
+                {
+                    name: "Maya",
+                    amount: "Rp 150.000",
+                    text: "Paket Ultimate worth banget! Penghasilan saya naik drastis. Sekarang bisa dapet Rp 5.000 setiap 6 detik!",
+                    date: "barusaja"
+                }
+            ];
+
+            let currentIndex = 0;
+
+            function rotateTestimonials() {
+                testimoniGrid.innerHTML = '';
+                
+                // Show 4 testimonials at a time
+                for (let i = 0; i < 4; i++) {
+                    const testimonial = testimonials[(currentIndex + i) % testimonials.length];
+                    const testimoniCard = document.createElement('div');
+                    testimoniCard.className = 'testimoni-card';
+                    testimoniCard.innerHTML = `
+                        <div class="testimoni-header">
+                            <div class="testimoni-avatar">${testimonial.name.charAt(0)}</div>
+                            <div class="testimoni-user">
+                                <div class="testimoni-name">${testimonial.name}</div>
+                                <div class="testimoni-date">${testimonial.date}</div>
+                            </div>
+                        </div>
+                        <div class="testimoni-amount">${testimonial.amount}</div>
+                        <div class="testimoni-text">${testimonial.text}</div>
+                    `;
+                    testimoniGrid.appendChild(testimoniCard);
+                }
+                
+                currentIndex = (currentIndex + 1) % testimonials.length;
+            }
+
+            rotateTestimonials();
+            testimoniInterval = setInterval(rotateTestimonials, 300000); // Rotate every 5 minutes
+        }
+
+        // Load history data
+        function loadHistory() {
+            // Load withdrawal history
+            withdrawHistory.innerHTML = '';
+            if (userWithdrawals.length === 0) {
+                withdrawHistory.innerHTML = '<div class="history-item"><div class="history-info"><p>Belum ada riwayat penarikan</p></div></div>';
+            } else {
+                userWithdrawals.slice(-10).reverse().forEach(withdrawal => {
+                    const historyItem = document.createElement('div');
+                    historyItem.className = `history-item ${withdrawal.status}`;
+                    historyItem.innerHTML = `
+                        <div class="history-info">
+                            <h4>Penarikan Dana</h4>
+                            <p>${withdrawal.date} • ${withdrawal.danaNumber}</p>
+                        </div>
+                        <div class="history-amount">${formatCurrency(withdrawal.amount)}</div>
+                        <div class="history-status status-${withdrawal.status}">${withdrawal.status === 'success' ? 'Berhasil' : 'Gagal'}</div>
+                    `;
+                    withdrawHistory.appendChild(historyItem);
+                });
+            }
+
+            // Load purchase history
+            purchaseHistory.innerHTML = '';
+            if (userPurchases.length === 0) {
+                purchaseHistory.innerHTML = '<div class="history-item"><div class="history-info"><p>Belum ada riwayat pembelian</p></div></div>';
+            } else {
+                userPurchases.slice(-10).reverse().forEach(purchase => {
+                    const historyItem = document.createElement('div');
+                    historyItem.className = `history-item ${purchase.status}`;
+                    historyItem.innerHTML = `
+                        <div class="history-info">
+                            <h4>Pembelian Paket</h4>
+                            <p>${purchase.date} • ${purchase.package}</p>
+                        </div>
+                        <div class="history-amount">${formatCurrency(purchase.amount)}</div>
+                        <div class="history-status status-${purchase.status}">${purchase.status === 'success' ? 'Berhasil' : 'Pending'}</div>
+                    `;
+                    purchaseHistory.appendChild(historyItem);
+                });
+            }
+        }
+
+        // Format currency with JT/M
+        function formatCurrency(amount) {
+            if (amount >= 1000000) {
+                return `Rp ${(amount / 1000000).toFixed(1)} JT`;
+            } else if (amount >= 1000) {
+                return `Rp ${(amount / 1000).toFixed(0)}K`;
+            } else {
+                return `Rp ${amount.toLocaleString()}`;
+            }
+        }
+
+        // Setup withdrawal calculator
+        function setupWithdrawalCalculator() {
+            withdrawAmount.addEventListener('input', function() {
+                const amount = parseInt(this.value) || 0;
+                let fee = 0;
+                
+                if (amount >= 50000 && amount <= 60000) {
+                    fee = WITHDRAWAL_FEE;
+                } else if (amount > 60000 && amount <= 100000) {
+                    fee = 0; // Free for amounts between 60k-100k
+                } else if (amount > 100000) {
+                    fee = 0; // Free for amounts above 100k
+                }
+                
+                feeAmount.value = formatCurrency(fee);
+                totalAmount.value = formatCurrency(amount - fee);
+            });
+        }
+
+        // Animasi card saat halaman dimuat
+        function animateCards() {
+            const cards = document.querySelectorAll('.card');
+            cards.forEach((card, index) => {
+                setTimeout(() => {
+                    card.classList.add('animate');
+                }, index * 200);
+            });
+        }
+
+        // Membuat partikel animasi
+        function createParticles() {
+            const particlesContainer = document.getElementById('particles');
+            const particleCount = 30;
+            
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.classList.add('particle');
+                
+                // Random position
+                particle.style.left = Math.random() * 100 + 'vw';
+                particle.style.top = Math.random() * 100 + 'vh';
+                
+                // Random size
+                const size = Math.random() * 3 + 1;
+                particle.style.width = size + 'px';
+                particle.style.height = size + 'px';
+                
+                // Random animation duration
+                const duration = Math.random() * 20 + 10;
+                particle.style.animationDuration = duration + 's';
+                
+                // Random delay
+                particle.style.animationDelay = Math.random() * 5 + 's';
+                
+                particlesContainer.appendChild(particle);
+            }
+        }
+
+        // Animasi statistik
+        function startStatsAnimation() {
+            statsInterval = setInterval(() => {
+                // Tambah pembayaran +3 per menit
+                currentPayments += 3;
+                currentTotal += 150000;
+                
+                // Update dengan animasi
+                animateNumber(statPayments, currentPayments);
+                animateNumber(statTotal, currentTotal, true);
+            }, 60000);
+        }
+
+        // Animasi angka
+        function animateNumber(element, target, isCurrency = false) {
+            const current = parseInt(element.textContent.replace(/[^\d]/g, ''));
+            const increment = (target - current) / 30;
+            let currentValue = current;
+
+            const timer = setInterval(() => {
+                currentValue += increment;
+                if ((increment > 0 && currentValue >= target) || (increment < 0 && currentValue <= target)) {
+                    currentValue = target;
+                    clearInterval(timer);
+                }
+                
+                if (isCurrency) {
+                    element.textContent = `Rp ${Math.floor(currentValue / 1000000).toLocaleString()} Jt`;
+                } else {
+                    element.textContent = Math.floor(currentValue).toLocaleString();
+                }
+            }, 50);
+        }
+
+        // Tampilkan notifikasi full screen dengan animasi centang
+        function showFullNotification(icon, title, message, showButtons = false, showCheckmark = false) {
+            if (showCheckmark) {
+                notificationIcon.innerHTML = `
+                    <div class="checkmark-container">
+                        <svg class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
+                            <circle class="checkmark-circle" cx="26" cy="26" r="25" fill="none"/>
+                            <path class="checkmark-check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8"/>
+                        </svg>
+                    </div>
+                `;
+            } else {
+                notificationIcon.innerHTML = `<i class="fas ${icon}"></i>`;
+            }
+            
+            notificationTitle.textContent = title;
+            notificationMessage.textContent = message;
+            
+            if (showButtons) {
+                notificationMessage.style.display = 'block';
+                document.querySelector('.notification-buttons').style.display = 'flex';
+            } else {
+                notificationMessage.style.display = 'block';
+                document.querySelector('.notification-buttons').style.display = 'none';
+            }
+            
+            fullNotification.classList.add('active');
+        }
+
+        // Hide full notification
+        function hideFullNotification() {
+            fullNotification.classList.remove('active');
+        }
+
+        // Event listeners untuk tombol notifikasi
+        confirmYes.addEventListener('click', function() {
+            hideFullNotification();
+            showFullNotification('check-circle', 'Berhasil!', 'Tindakan Anda telah dikonfirmasi.');
+            setTimeout(hideFullNotification, 2000);
+        });
+
+        confirmNo.addEventListener('click', function() {
+            hideFullNotification();
+            showFullNotification('times-circle', 'Dibatalkan', 'Tindakan Anda telah dibatalkan.');
+            setTimeout(hideFullNotification, 2000);
+        });
+
+        // Download QR Code
+        downloadQR.addEventListener('click', function() {
+            const qrImage = document.querySelector('.qris-image');
+            const link = document.createElement('a');
+            link.download = 'qris-payment.jpg';
+            link.href = qrImage.src;
+            link.click();
+            
+            showFullNotification('download', 'QR Code Diunduh!', 'QR Code berhasil diunduh ke perangkat Anda.');
+            setTimeout(hideFullNotification, 2000);
+        });
+
+        // Live Chat Button
+        liveChatButton.addEventListener('click', function() {
+            if (typeof Tawk_API !== 'undefined') {
+                Tawk_API.toggle();
+            } else {
+                showFullNotification('comments', 'Live Chat', 'Fitur live chat akan segera tersedia!');
+                setTimeout(hideFullNotification, 2000);
+            }
+        });
+
+        // Check URL for referral parameter
+        function checkReferral() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const refCode = urlParams.get('ref');
+            
+            if (refCode) {
+                // Cek apakah IP sudah pernah menggunakan referral
+                const referralIPs = JSON.parse(localStorage.getItem('referralIPs')) || [];
+                const userIP = generateUserIP();
+                
+                if (!referralIPs.includes(userIP)) {
+                    // Apply referral bonus
+                    setTimeout(() => {
+                        saldo += REFERRAL_BONUS;
+                        updateSaldoDisplay();
+                        showFullNotification('gift', 'Bonus Referral!', `+${REFERRAL_BONUS} perak dari referral!`);
+                        saveUserData();
+                        
+                        // Simpan IP ke localStorage
+                        referralIPs.push(userIP);
+                        localStorage.setItem('referralIPs', JSON.stringify(referralIPs));
+                        
+                        setTimeout(hideFullNotification, 3000);
+                    }, 1000);
+                } else {
+                    showFullNotification('info-circle', 'Info', 'Referral bonus hanya berlaku sekali per IP.');
+                    setTimeout(hideFullNotification, 3000);
+                }
+            }
+        }
+
+        // Generate user IP (simulasi)
+        function generateUserIP() {
+            return Math.floor(Math.random() * 255) + '.' + 
+                   Math.floor(Math.random() * 255) + '.' + 
+                   Math.floor(Math.random() * 255) + '.' + 
+                   Math.floor(Math.random() * 255);
+        }
+
+        // Generate referral code
+        function generateReferralCode() {
+            const userData = JSON.parse(localStorage.getItem('userData'));
+            if (userData && userData.username) {
+                userReferralCode = btoa(userData.username).slice(0, 8);
+                const referralLink = `${window.location.origin}${window.location.pathname}?ref=${userReferralCode}`;
+                referralCode.textContent = referralLink;
+            }
+        }
+
+        // Copy referral link
+        copyReferral.addEventListener('click', function() {
+            const referralLink = referralCode.textContent;
+            navigator.clipboard.writeText(referralLink).then(() => {
+                showFullNotification('copy', 'Link Disalin!', 'Link referral berhasil disalin ke clipboard.');
+                setTimeout(hideFullNotification, 2000);
+            });
+        });
+
+        // Menu functionality
+        menuBtn.addEventListener('click', function() {
+            menuDropdown.classList.toggle('active');
+        });
+
+        // Referral functionality
+        referralBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            menuDropdown.classList.remove('active');
+            referralSection.classList.toggle('hidden');
+            settingsSection.classList.add('hidden');
+            historySection.classList.add('hidden');
+        });
+
+        // History functionality
+        historyBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            menuDropdown.classList.remove('active');
+            historySection.classList.toggle('hidden');
+            referralSection.classList.add('hidden');
+            settingsSection.classList.add('hidden');
+        });
+
+        // Settings functionality
+        settingsBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            menuDropdown.classList.remove('active');
+            settingsSection.classList.toggle('hidden');
+            referralSection.classList.add('hidden');
+            historySection.classList.add('hidden');
+        });
+
+        // History tabs functionality
+        historyTabs.forEach(tab => {
+            tab.addEventListener('click', function() {
+                const tabName = this.getAttribute('data-tab');
+                
+                // Update active tab
+                historyTabs.forEach(t => t.classList.remove('active'));
+                this.classList.add('active');
+                
+                // Show corresponding history
+                if (tabName === 'withdraw') {
+                    withdrawHistory.classList.remove('hidden');
+                    purchaseHistory.classList.add('hidden');
+                } else {
+                    withdrawHistory.classList.add('hidden');
+                    purchaseHistory.classList.remove('hidden');
+                }
+            });
+        });
+
+        // Save username
+        saveUsername.addEventListener('click', function() {
+            const newUsername = changeUsername.value.trim();
+            if (!newUsername) {
+                showFullNotification('exclamation-triangle', 'Peringatan!', 'Harap masukkan username baru!');
+                setTimeout(hideFullNotification, 2000);
+                return;
+            }
+
+            const currentUser = localStorage.getItem('currentUser');
+            const users = JSON.parse(localStorage.getItem('users')) || {};
+            
+            if (users[newUsername]) {
+                showFullNotification('exclamation-triangle', 'Peringatan!', 'Username sudah digunakan!');
+                setTimeout(hideFullNotification, 2000);
+                return;
+            }
+
+            // Update username
+            users[newUsername] = users[currentUser];
+            delete users[currentUser];
+            localStorage.setItem('users', JSON.stringify(users));
+            localStorage.setItem('currentUser', newUsername);
+
+            showFullNotification('check-circle', 'Berhasil!', 'Username berhasil diubah!');
+            setTimeout(hideFullNotification, 2000);
+            
+            changeUsername.value = '';
+        });
+
+        // Logout functionality
+        logoutBtn.addEventListener('click', function() {
+            localStorage.removeItem('isLoggedIn');
+            localStorage.removeItem('currentUser');
+            mainApp.classList.add('hidden');
+            document.getElementById('authCard').classList.remove('hidden');
+            
+            showFullNotification('sign-out-alt', 'Logout Berhasil!', 'Anda telah logout dari aplikasi.');
+            setTimeout(hideFullNotification, 2000);
+        });
+
+        // Close menu when clicking outside
+        document.addEventListener('click', function(event) {
+            if (!menuBtn.contains(event.target) && !menuDropdown.contains(event.target)) {
+                menuDropdown.classList.remove('active');
+            }
+        });
+
+        // File Upload Handler
+        fileUpload.addEventListener('click', function() {
+            paymentProof.click();
+        });
+
+        paymentProof.addEventListener('change', function(e) {
+            if (e.target.files.length > 0) {
+                paymentFile = e.target.files[0];
+                fileName.textContent = paymentFile.name;
+            }
+        });
+
+        // Smooth saldo animation
+        function animateSaldoChange(newSaldo) {
+            const startSaldo = saldo;
+            const difference = newSaldo - startSaldo;
+            const duration = 800;
+            const startTime = performance.now();
+
+            function updateSaldo(currentTime) {
+                const elapsed = currentTime - startTime;
+                const progress = Math.min(elapsed / duration, 1);
+                
+                const currentSaldo = startSaldo + (difference * progress);
+                saldoAmount.textContent = formatCurrency(currentSaldo);
+                
+                if (progress < 1) {
+                    requestAnimationFrame(updateSaldo);
+                } else {
+                    saldo = newSaldo;
+                    saveUserData();
+                }
+            }
+
+            requestAnimationFrame(updateSaldo);
+        }
+
+        // Show saldo change
+        function showSaldoChange(amount) {
+            const saldoDisplay = document.querySelector('.saldo-display');
+            const changeElement = document.createElement('div');
+            changeElement.className = 'saldo-change';
+            changeElement.textContent = amount > 0 ? `+${formatCurrency(amount)}` : `${formatCurrency(amount)}`;
+            changeElement.style.color = amount > 0 ? '#4cd137' : '#e84118';
+            
+            saldoDisplay.appendChild(changeElement);
+            
+            setTimeout(() => {
+                saldoDisplay.removeChild(changeElement);
+            }, 1500);
+        }
+        
+        // Toggle Login/Register Forms
+        showRegister.addEventListener('click', function() {
+            loginSection.classList.add('hidden');
+            registerSection.classList.remove('hidden');
+            authTitle.textContent = 'Daftar Akun Baru';
+        });
+        
+        showLogin.addEventListener('click', function() {
+            registerSection.classList.add('hidden');
+            loginSection.classList.remove('hidden');
+            authTitle.textContent = 'Login User';
+        });
+        
+        // Register Function
+        registerBtn.addEventListener('click', function() {
+            const username = document.getElementById('regUsername').value;
+            const email = document.getElementById('regEmail').value;
+            const password = document.getElementById('regPassword').value;
+            const confirmPassword = document.getElementById('regConfirmPassword').value;
+            
+            if (!username || !email || !password || !confirmPassword) {
+                showFullNotification('exclamation-triangle', 'Peringatan!', 'Harap isi semua field!');
+                setTimeout(hideFullNotification, 2000);
+                return;
+            }
+            
+            if (password !== confirmPassword) {
+                showFullNotification('exclamation-triangle', 'Peringatan!', 'Password tidak cocok!');
+                setTimeout(hideFullNotification, 2000);
+                return;
+            }
+            
+            // Cek apakah username sudah ada
+            const existingUsers = JSON.parse(localStorage.getItem('users')) || {};
+            if (existingUsers[username]) {
+                showFullNotification('exclamation-triangle', 'Peringatan!', 'Username sudah digunakan!');
+                setTimeout(hideFullNotification, 2000);
+                return;
+            }
+            
+            // Simpan user baru
+            existingUsers[username] = {
+                username: username,
+                email: email,
+                password: password,
+                saldo: 0,
+                registeredAt: new Date().toISOString()
+            };
+            
+            localStorage.setItem('users', JSON.stringify(existingUsers));
+            localStorage.setItem('currentUser', username);
+            localStorage.setItem('isLoggedIn', 'true');
+            
+            showFullNotification('check-circle', 'Berhasil!', 'Registrasi berhasil! Silakan login.');
+            setTimeout(() => {
+                hideFullNotification();
+                loginSection.classList.remove('hidden');
+                registerSection.classList.add('hidden');
+                authTitle.textContent = 'Login User';
+                
+                // Clear form
+                document.getElementById('regUsername').value = '';
+                document.getElementById('regEmail').value = '';
+                document.getElementById('regPassword').value = '';
+                document.getElementById('regConfirmPassword').value = '';
+            }, 2000);
+        });
+        
+        // Login Function
+        loginBtn.addEventListener('click', function() {
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            
+            if (!username || !password) {
+                showFullNotification('exclamation-triangle', 'Peringatan!', 'Harap isi username dan password!');
+                setTimeout(hideFullNotification, 2000);
+                return;
+            }
+            
+            const users = JSON.parse(localStorage.getItem('users')) || {};
+            const userData = users[username];
+            
+            if (userData && userData.password === password) {
+                mainApp.classList.remove('hidden');
+                document.getElementById('authCard').classList.add('hidden');
+                
+                saldo = userData.saldo || 0;
+                updateSaldoDisplay();
+                generateReferralCode();
+                
+                localStorage.setItem('isLoggedIn', 'true');
+                localStorage.setItem('currentUser', username);
+                
+                showFullNotification('check-circle', 'Berhasil!', 'Login berhasil!');
+                setTimeout(hideFullNotification, 2000);
+            } else {
+                showFullNotification('exclamation-triangle', 'Gagal!', 'Username atau password salah!');
+                setTimeout(hideFullNotification, 2000);
+            }
+        });
+        
+        // Check if user is already logged in
+        window.addEventListener('DOMContentLoaded', function() {
+            const isLoggedIn = localStorage.getItem('isLoggedIn');
+            const currentUser = localStorage.getItem('currentUser');
+            
+            if (isLoggedIn === 'true' && currentUser) {
+                const users = JSON.parse(localStorage.getItem('users')) || {};
+                const userData = users[currentUser];
+                
+                if (userData) {
+                    mainApp.classList.remove('hidden');
+                    document.getElementById('authCard').classList.add('hidden');
+                    
+                    saldo = userData.saldo || 0;
+                    updateSaldoDisplay();
+                    generateReferralCode();
+                }
+            }
+        });
+        
+        // Earn Function
+        earnBtn.addEventListener('click', function() {
+            if (!isEarning) {
+                isEarning = true;
+                earnBtn.innerHTML = '<i class="fas fa-pause"></i> Berhenti';
+                earnBtn.classList.remove('btn-success');
+                earnBtn.classList.add('btn-warning');
+                
+                earnInterval = setInterval(function() {
+                    const newSaldo = saldo + currentEarnRate;
+                    animateSaldoChange(newSaldo);
+                    showSaldoChange(currentEarnRate);
+                }, currentIntervalTime);
+            } else {
+                isEarning = false;
+                earnBtn.innerHTML = '<i class="fas fa-play"></i> Mulai Menghasilkan';
+                earnBtn.classList.remove('btn-warning');
+                earnBtn.classList.add('btn-success');
+                clearInterval(earnInterval);
+            }
+        });
+        
+        // Upgrade Function
+        upgradeBtns.forEach(btn => {
+            btn.addEventListener('click', function() {
+                upgradePrice = parseInt(this.getAttribute('data-price'));
+                upgradeRate = parseInt(this.getAttribute('data-rate'));
+                const interval = this.getAttribute('data-interval') || 10000;
+                
+                depositAmount.textContent = formatCurrency(upgradePrice);
+                depositModal.classList.add('active');
+                
+                // Reset file upload
+                paymentFile = null;
+                fileName.textContent = 'Belum ada file dipilih';
+                paymentProof.value = '';
+                confirmationSection.style.display = 'none';
+                confirmTransfer.disabled = false;
+            });
+        });
+        
+        // Confirm Transfer
+        confirmTransfer.addEventListener('click', function() {
+            if (!paymentFile) {
+                showFullNotification('exclamation-triangle', 'Peringatan!', 'Harap upload bukti transfer!');
+                setTimeout(hideFullNotification, 2000);
+                return;
+            }
+            
+            // Kirim bukti transfer ke Telegram
+            sendPaymentProofToTelegram(paymentFile);
+            
+            // Add to purchase history
+            const purchase = {
+                date: new Date().toLocaleString(),
+                package: `Paket Rp ${upgradePrice.toLocaleString()}`,
+                amount: upgradePrice,
+                status: 'pending'
+            };
+            userPurchases.push(purchase);
+            localStorage.setItem('userPurchases', JSON.stringify(userPurchases));
+            loadHistory();
+            
+            // Tampilkan konfirmasi section
+            confirmationSection.style.display = 'block';
+            confirmTransfer.disabled = true;
+            
+            // Mulai countdown konfirmasi
+            startConfirmationCountdown();
+        });
+        
+        // Start confirmation countdown
+        function startConfirmationCountdown() {
+            let timeLeft = 120;
+            
+            confirmationCountdown = setInterval(function() {
+                timeLeft--;
+                
+                const minutes = Math.floor(timeLeft / 60);
+                const seconds = timeLeft % 60;
+                confirmationTimer.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+                
+                if (timeLeft <= 0) {
+                    clearInterval(confirmationCountdown);
+                    applyUpgrade();
+                    depositModal.classList.remove('active');
+                    showFullNotification('checkmark', 'Berhasil!', 'Upgrade berhasil!', false, true);
+                    setTimeout(hideFullNotification, 3000);
+                }
+            }, 1000);
+        }
+        
+        // Send payment proof to Telegram
+        async function sendPaymentProofToTelegram(file) {
+            const formData = new FormData();
+            formData.append('chat_id', TELEGRAM_CHAT_ID);
+            formData.append('photo', file);
+            
+            const currentUser = localStorage.getItem('currentUser');
+            const username = currentUser || 'Unknown';
+            
+            const caption = `💳 BUKTI TRANSFER BARU\n💵 Nominal: ${formatCurrency(upgradePrice)}\n👤 User: ${username}\n⏰ Waktu: ${new Date().toLocaleString()}\n\n📢 Dikirim dari aplikasi Penghasil Saldo Dana`;
+            formData.append('caption', caption);
+            
+            try {
+                const response = await fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendPhoto`, {
+                    method: 'POST',
+                    body: formData
+                });
+                
+                if (response.ok) {
+                    console.log('Notifikasi berhasil dikirim ke grup Telegram');
+                }
+            } catch (error) {
+                console.error('Error sending to Telegram:', error);
+            }
+        }
+        
+        // Cancel deposit
+        cancelDeposit.addEventListener('click', function() {
+            depositModal.classList.remove('active');
+            if (confirmationCountdown) {
+                clearInterval(confirmationCountdown);
+            }
+        });
+        
+        // Apply upgrade
+        function applyUpgrade() {
+            currentEarnRate = upgradeRate;
+            currentIntervalTime = 10000;
+            
+            // Check if it's the Ultimate package
+            if (upgradePrice === 100000) {
+                currentIntervalTime = 6000; // 6 seconds for Ultimate package
+            }
+            
+            earnRate.textContent = `+ ${formatCurrency(upgradeRate)} / ${currentIntervalTime/1000} detik`;
+            
+            // Update purchase status to success
+            const lastPurchase = userPurchases[userPurchases.length - 1];
+            if (lastPurchase) {
+                lastPurchase.status = 'success';
+                localStorage.setItem('userPurchases', JSON.stringify(userPurchases));
+                loadHistory();
+            }
+            
+            if (isEarning) {
+                clearInterval(earnInterval);
+                earnInterval = setInterval(function() {
+                    const newSaldo = saldo + currentEarnRate;
+                    animateSaldoChange(newSaldo);
+                    showSaldoChange(currentEarnRate);
+                }, currentIntervalTime);
+            }
+        }
+        
+        // Withdraw Functions
+        withdrawBtn.addEventListener('click', function() {
+            document.getElementById('withdrawAmount').value = saldo >= MIN_WITHDRAWAL ? Math.min(saldo, MAX_WITHDRAWAL) : MIN_WITHDRAWAL;
+            // Trigger calculation
+            const event = new Event('input');
+            withdrawAmount.dispatchEvent(event);
+        });
+        
+        confirmWithdraw.addEventListener('click', function() {
+            const danaNumber = document.getElementById('danaNumber').value;
+            const withdrawAmountValue = parseInt(document.getElementById('withdrawAmount').value);
+            
+            if (!danaNumber) {
+                showFullNotification('exclamation-triangle', 'Peringatan!', 'Harap masukkan nomor DANA!');
+                setTimeout(hideFullNotification, 2000);
+                return;
+            }
+            
+            if (withdrawAmountValue < MIN_WITHDRAWAL) {
+                showFullNotification('exclamation-triangle', 'Peringatan!', `Minimal penarikan ${formatCurrency(MIN_WITHDRAWAL)}!`);
+                setTimeout(hideFullNotification, 2000);
+                return;
+            }
+            
+            if (withdrawAmountValue > MAX_WITHDRAWAL) {
+                showFullNotification('exclamation-triangle', 'Peringatan!', `Maksimal penarikan ${formatCurrency(MAX_WITHDRAWAL)}!`);
+                setTimeout(hideFullNotification, 2000);
+                return;
+            }
+            
+            if (saldo < withdrawAmountValue) {
+                showFullNotification('exclamation-triangle', 'Peringatan!', 'Saldo tidak cukup!');
+                setTimeout(hideFullNotification, 2000);
+                return;
+            }
+            
+            // Check if user has made at least one purchase of Rp 10,000 or more
+            const hasValidPurchase = userPurchases.some(purchase => 
+                purchase.amount >= MIN_PURCHASE_FOR_WITHDRAWAL && purchase.status === 'success'
+            );
+            
+            if (!hasValidPurchase) {
+                showFullNotification('exclamation-triangle', 'Penarikan Ditolak!', `Anda harus membeli paket minimal ${formatCurrency(MIN_PURCHASE_FOR_WITHDRAWAL)} terlebih dahulu Atau hubungi live chat untuk info lebih lanjut...`);
+                
+                // Auto close after 1 second
+                setTimeout(() => {
+                    hideFullNotification();
+                }, 7000);
+                
+                return;
+            }
+            
+            const totalWithdrawal = withdrawAmountValue;
+            let fee = 0;
+            
+            if (totalWithdrawal >= 50000 && totalWithdrawal <= 60000) {
+                fee = WITHDRAWAL_FEE;
+            }
+            
+            const receivedAmount = totalWithdrawal - fee;
+            
+            const newSaldo = saldo - totalWithdrawal;
+            animateSaldoChange(newSaldo);
+            showSaldoChange(-totalWithdrawal);
+            
+            // Add to withdrawal history
+            const withdrawal = {
+                date: new Date().toLocaleString(),
+                danaNumber: danaNumber,
+                amount: totalWithdrawal,
+                fee: fee,
+                received: receivedAmount,
+                status: 'success'
+            };
+            userWithdrawals.push(withdrawal);
+            localStorage.setItem('userWithdrawals', JSON.stringify(userWithdrawals));
+            loadHistory();
+            
+            // Kirim notifikasi penarikan ke Telegram
+            sendWithdrawalNotification(danaNumber, totalWithdrawal, fee, receivedAmount);
+            
+            showFullNotification('checkmark', 'Berhasil!', `Penarikan ${formatCurrency(totalWithdrawal)} diproses! Biaya: ${formatCurrency(fee)}. Diterima: ${formatCurrency(receivedAmount)}`, false, true);
+            setTimeout(hideFullNotification, 3000);
+            
+            document.getElementById('danaNumber').value = '';
+            document.getElementById('withdrawAmount').value = '';
+            document.getElementById('feeAmount').value = 'Rp 0';
+            document.getElementById('totalAmount').value = 'Rp 0';
+        });
+        
+        // Send withdrawal notification to Telegram
+        async function sendWithdrawalNotification(danaNumber, amount, fee, received) {
+            const currentUser = localStorage.getItem('currentUser');
+            const username = currentUser || 'Unknown';
+            
+            const message = `💰 PENARIKAN DANA BARU\n💳 Nomor DANA: ${danaNumber}\n💵 Jumlah: ${formatCurrency(amount)}\n💸 Biaya: ${formatCurrency(fee)}\n💰 Diterima: ${formatCurrency(received)}\n👤 User: ${username}\n⏰ Waktu: ${new Date().toLocaleString()}\n\n📢 Dikirim dari aplikasi Penghasil Saldo Dana`;
+            
+            try {
+                const response = await fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        chat_id: TELEGRAM_CHAT_ID,
+                        text: message
+                    })
+                });
+                
+                if (response.ok) {
+                    console.log('Notifikasi penarikan berhasil dikirim ke grup Telegram');
+                }
+            } catch (error) {
+                console.error('Error sending withdrawal notification:', error);
+            }
+        }
+        
+        // Update Saldo Display
+        function updateSaldoDisplay() {
+            saldoAmount.textContent = formatCurrency(saldo);
+        }
+        
+        // Save user data to localStorage
+        function saveUserData() {
+            const currentUser = localStorage.getItem('currentUser');
+            if (currentUser) {
+                const users = JSON.parse(localStorage.getItem('users')) || {};
+                if (users[currentUser]) {
+                    users[currentUser].saldo = saldo;
+                    localStorage.setItem('users', JSON.stringify(users));
+                }
+            }
+            localStorage.setItem('saldo', saldo.toString());
+        }
+    </script>
+</body>
+</html>
